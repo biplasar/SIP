@@ -22,7 +22,11 @@ export class RepositoryListComponent {
   private getRepositories() {
     this.repositoryService.getRepositoryList().subscribe(data => {
       console.log(data);
-      this.repositories = data.list;
+      // for v2
+      //this.repositories = data.list;
+
+      // for v1
+      this.repositories = data;
     });
   }
 
