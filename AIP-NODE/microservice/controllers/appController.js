@@ -15,15 +15,6 @@ var options = {
   }
 };
 
-var report = {
-  'method': 'GET',
-  'url': 'http://sipembold.eastus.cloudapp.azure.com:3000/api/v1/repositories/128770b54001a3481c9747ed80b89afe/pdfreport',
-  'headers': {
-    'Authorization': 'Bearer eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTY4MDYwMDQ4MDkzMCwiaWF0IjoxNjgwNjAwNDgwfQ.5-RIW5VrXEZ_bYuWDu1zL0DuNljZWVIgrHOMYcm8mlCgsnFhqDh8tBx48kUKcOthdpv8b5m0JVoQAsjcpqxT-A'
-  }
-};
-
-
 
 const controllers = {
     getRepositories: (req, res) => {
@@ -34,13 +25,39 @@ const controllers = {
           });
     },
 
-    getReport: (req, res) => {
-      request(report, function (error, response) {
-          if (error) throw new Error(error);
-          console.log(response.body);
-          res.send(response.body);
-        });
-  }    
+  
+  /*getReport: (req, res) => {
+    request({'method': 'GET', 'url': 'http://sipembold.eastus.cloudapp.azure.com:3000/api/v1/repositories/' + req.params.repositoryUID + '/pdfreport', 'headers': {
+      'Authorization': 'Bearer eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTY4MDYwMDQ4MDkzMCwiaWF0IjoxNjgwNjAwNDgwfQ.5-RIW5VrXEZ_bYuWDu1zL0DuNljZWVIgrHOMYcm8mlCgsnFhqDh8tBx48kUKcOthdpv8b5m0JVoQAsjcpqxT-A'
+    }}, function (error, response) {
+        if (error) throw new Error(error);
+        let blob = new Blob([data], {type: 'application/pdf'});
+        console.log(response.body);
+        //res.setHeader('Content-Type', 'application/pdf');
+        res.send(response.body);
+      });
+},*/
+
+getReport: (req, res) => {
+  request({'method': 'GET', 'url': 'http://sipembold.eastus.cloudapp.azure.com:3000/api/v1/repositories/' + req.params.repositoryUID + '/pdfreport', 'headers': {
+    'Authorization': 'Bearer eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTY4MDYwMDQ4MDkzMCwiaWF0IjoxNjgwNjAwNDgwfQ.5-RIW5VrXEZ_bYuWDu1zL0DuNljZWVIgrHOMYcm8mlCgsnFhqDh8tBx48kUKcOthdpv8b5m0JVoQAsjcpqxT-A'
+  }}, function (error, response) {
+      if (error) throw new Error(error);
+      console.log(response.body);
+      res.setHeader('Content-Type', 'application/pdf');
+      res.send(response.body);
+    });
+},
+
+performScan: (req, res) => {
+  request({'method': 'POST', 'url': 'http://sipembold.eastus.cloudapp.azure.com:3000/api/v1/repositories/' + req.params.repositoryUID + '/scan', 'headers': {
+    'Authorization': 'Bearer eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTY4MDYwMDQ4MDkzMCwiaWF0IjoxNjgwNjAwNDgwfQ.5-RIW5VrXEZ_bYuWDu1zL0DuNljZWVIgrHOMYcm8mlCgsnFhqDh8tBx48kUKcOthdpv8b5m0JVoQAsjcpqxT-A'
+  }}, function (error, response) {
+      if (error) throw new Error(error);
+      console.log(response.body);
+      res.send(response.body);
+    });
+}
 };
 
 module.exports = controllers;

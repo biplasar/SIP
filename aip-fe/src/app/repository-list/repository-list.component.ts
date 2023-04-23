@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { RepositoryService } from '../repository.service';
+import { saveAs } from 'file-saver';
 @Component({
   selector: 'app-repository-list',
   templateUrl: './repository-list.component.html',
@@ -30,18 +31,26 @@ export class RepositoryListComponent {
     });
   }
 
-  /*repositoryDetails(uid: string){
-    this.router.navigate(['repository-details', uid]);
+  public getScanReport(uid: String) {
+    this.repositoryService.getScanReport(uid).subscribe(data => {
+      let blob:any = new Blob([data], {type: 'application/pdf'});
+      const url = window.URL.createObjectURL(blob);
+      saveAs(blob, 'scanreport.pdf');
+      console.log(data);
+    }), (error:any) => console.log("Error Downloading Report"),
+    () => console.info("Report Downloaded Successfully");
   }
 
-  updateRepository(uid: string){
-    this.router.navigate(['update-repository', uid]);
-  }*/
-
-  /*deleteRepository(uid: string){
-    this.repositoryService.deleteRepository(uid).subscribe( data => {
+  /*public getScanReport(uid: String) {
+    this.repositoryService.getScanReport(uid).subscribe(data => {
       console.log(data);
-      this.getRepositories();
     })
   }*/
+
+
+  public scanRepository(uid: string){
+    this.repositoryService.scanRepository(uid).subscribe(data => {
+      console.log(data);
+    });
+  }
 }

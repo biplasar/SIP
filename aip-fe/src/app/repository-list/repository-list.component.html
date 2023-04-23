@@ -11,7 +11,8 @@
             <th> Repository LOC</th>
             <th> Overall Rating </th>
             <th> Last Scanned Date</th>
-            <th> Actions </th>
+            <th> Scan Repository </th>
+            <th> Scan Report </th>
         </tr>
     </thead>
     <tbody>
@@ -23,8 +24,12 @@
             <td> {{ repository.overallRating }} </td>
             <td> {{ repository.timeStamp }} </td>
             <td>
-                <!--<button (click) = "scanRepository(repository.uid)" class = "btn btn-primary"> Update</button>-->
-                <!--<button (click) = "repositoryDetails(repository.uid)" class = "btn btn-primary" style="margin-left: 10px"> View</button>-->
+                <!--<button  class = "btn btn-primary"> Scan Repository</button>-->
+                <button (click) = "scanRepository(repository.uid)" class = "btn btn-primary"> Scan</button>
+                <!--<button (click) = "getScanReport(repository.uid)" class = "btn btn-primary" style="margin-left: 10px"> View Report</button>-->
+            </td>
+            <td>
+                <button (click) = "getScanReport(repository.uid)" class = "btn btn-primary"> Scan Report</button>
             </td>
         </tr>
     </tbody>

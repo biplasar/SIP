@@ -5,6 +5,8 @@ import { RepositoryListComponent } from './repository-list/repository-list.compo
 const routes: Routes = [
   {path: 'repository-list', component: RepositoryListComponent},
   {path: '', redirectTo: 'repository-list', pathMatch: 'full'},
+  ///repositories/{repositoryUid}/scan
+  
 ];
 
 @NgModule({
